@@ -1,0 +1,50 @@
+<html>
+	<body>
+		<h1>TShirts</h1>
+			<table id='products'>
+				<thead>
+					<tr id='headerRow'>
+						<th>
+							Name
+						</th>
+						<th>
+							Size
+						</th>
+						<th>
+							Colour
+						</th>
+						<th>
+							Id
+						</th>
+					</tr>
+				</thead>
+				<tbody id='tableBody'>
+				</tbody>
+			</table>
+		<script>
+			fetch('http://localhost:7071/api/GetTShirts')
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				data.forEach(function(tshirt){
+					document.getElementById('tableBody').appendChild(rowOfDataFromObject(tshirt));
+				});
+			})
+			.catch(function(error){
+				console.log(error);
+			});
+			function rowOfDataFromObject(data){
+				let row = document.createElement('tr');
+				for(property in data){
+					if (data.hasOwnProperty(property)){
+						let tableElement = document.createElement('td');
+						tableElement.appendChild(document.createTextNode(data[property]));
+						row.appendChild(tableElement);
+					}
+				}
+				return row;
+			}
+		</script>
+	</body>
+</html>
