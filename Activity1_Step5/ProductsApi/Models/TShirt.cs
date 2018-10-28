@@ -1,4 +1,4 @@
-namespace Activity1_Step4.Models {
+namespace ProductsApi.Models {
     public class TShirt {
         public string Name { get; set; }
 
