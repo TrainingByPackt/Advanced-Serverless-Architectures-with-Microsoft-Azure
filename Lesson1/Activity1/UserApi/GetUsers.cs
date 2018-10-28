@@ -21,12 +21,12 @@ namespace UserApi
         private static DocumentClient client = new DocumentClient(new Uri(""),"");
         private static Uri userCollectionUri = UriFactory.CreateDocumentCollectionUri("serverless","users");
 
-        private static readonly FeedOptions productQueryOptions = new FeedOptions { MaxItemCount = -1 };
+        private static readonly FeedOptions userQueryOptions = new FeedOptions { MaxItemCount = -1 };
 
         [FunctionName("GetUsers")]
         public static async Task<List<User>> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]HttpRequest req, ILogger log)
         {
-            return client.CreateDocumentQuery<User>(productCollectionUri, productQueryOptions).ToList();
+            return client.CreateDocumentQuery<User>(userCollectionUri, userQueryOptions).ToList();
         }
     }
 }
