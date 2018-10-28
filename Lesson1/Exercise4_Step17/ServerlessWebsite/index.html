@@ -1,0 +1,48 @@
+<html>
+	<body>
+		<h1>Hello World!</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
+						Colour
+					</th>
+					<th>
+						Id
+					</th>
+				</tr>
+			</thead>
+			<tbody id='tableBody'>
+			</tbody>
+		</table>
+		<script>
+		function rowOfDataFromObject(data){
+			let row = document.createElement('tr');
+
+			let nameTableElement = document.createElement('td');
+			nameTableElement.appendChild(document.createTextNode(data.name))
+			row.appendChild(nameTableElement);
+			
+			let sizeTableElement = document.createElement('td');
+			sizeTableElement.appendChild(document.createTextNode(data.size))
+			row.appendChild(sizeTableElement);
+			
+			let colourTableElement = document.createElement('td');
+			colourTableElement.appendChild(document.createTextNode(data.colour))
+			row.appendChild(colourTableElement);
+			
+			let quantityTableElement = document.createElement('td');
+			quantityTableElement.appendChild(document.createTextNode(data.quantityInStock))
+			row.appendChild(quantityTableElement);
+
+			return row;
+		}
+		</script>
+	</body>
+</html>

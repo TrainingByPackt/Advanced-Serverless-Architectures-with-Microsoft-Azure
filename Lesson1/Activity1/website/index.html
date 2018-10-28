@@ -1,0 +1,44 @@
+<html>
+	<body>
+		<h1>Hello World!</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Email Address
+					</th>
+				</tr>
+			</thead>
+			<tbody id='tableBody'>
+			</tbody>
+		</table>
+		<script>
+			fetch('http://localhost:7071/api/GetUsers')
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				data.forEach(function(product){
+					var productRow = rowOfDataFromObject(product);
+					document.getElementById("tableBody").appendChild(productRow);
+				});
+			});
+			function rowOfDataFromObject(data){
+				let row = document.createElement('tr');
+
+				let nameTableElement = document.createElement('td');
+				nameTableElement.appendChild(document.createTextNode(data.name))
+				row.appendChild(nameTableElement);
+				
+				let emailTableElement = document.createElement('td');
+				emailTableElement.appendChild(document.createTextNode(data.email))
+				row.appendChild(emailTableElement);
+
+				return row;
+			}
+		</script>
+	</body>
+</html>
