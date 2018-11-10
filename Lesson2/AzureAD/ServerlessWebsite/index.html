@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script> 
+	</head>
+	<body>
+		<h1>Hello World!</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
+						Colour
+					</th>
+					<th>
+						Quantity in Stock
+					</th>
+				</tr>
+			</thead>
+			<tbody id='tableBody'>
+			</tbody>
+		</table>
+		<script>
+			window.config = {
+			clientId: "8a3b909b-47f5-471f-8f1d-946885f491f9"
+			};
+			var authContext = new AuthenticationContext(config);
+
+			authContext.login()
+			fetch('http://localhost:7071/api/GetProducts')
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				data.forEach(function(product){
+					var productRow = rowOfDataFromObject(product);
+					document.getElementById("tableBody").appendChild(productRow);
+				});
+			});
+			function rowOfDataFromObject(data){
+				let row = document.createElement('tr');
+
+				let nameTableElement = document.createElement('td');
+				nameTableElement.appendChild(document.createTextNode(data.name))
+				row.appendChild(nameTableElement);
+				
+				let sizeTableElement = document.createElement('td');
+				sizeTableElement.appendChild(document.createTextNode(data.size))
+				row.appendChild(sizeTableElement);
+				
+				let colourTableElement = document.createElement('td');
+				colourTableElement.appendChild(document.createTextNode(data.colour))
+				row.appendChild(colourTableElement);
+				
+				let quantityTableElement = document.createElement('td');
+				quantityTableElement.appendChild(document.createTextNode(data.quantityInStock))
+				row.appendChild(quantityTableElement);
+
+				return row;
+			}
+		</script>
+	</body>
+</html>
