@@ -1,12 +1,28 @@
-<!DOCTYPE html>
 <html>
+    <head>
+    </head>
     <body>
         <form>
-            Product Identifier: <input type="text" name="productId">
-            <br>
-            Quantity to Order: <input type="number" name="quantityOrdered">
-            <br>
-            <input type="submit" value="Submit order">
+            Product Identifier: <input type="text" id="productId">
+			<br>
+			Quantity to Order: <input type="number" id="quantityOrdered">
+			<br>
+            <button id="submissionButton">Submit Order</button>
         </form>
+        <script>
+            document.getElementById('submissionButton').addEventListener('click', async function(event) {
+                event.preventDefault();
+                var productId = document.getElementById('productId').value;
+                var quantity = document.getElementById('quantityOrdered').value;
+                const response = await fetch("http://localhost:7071/api/SubmitOrder", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({ productId: productId, quantity: quantity})
+                });
+            });
+        </script>
     </body>
 </html>
