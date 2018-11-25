@@ -11,7 +11,7 @@ namespace OrderDurableFunctions
     {
         [FunctionName("IngestOrder")]
         public static Task Run(
-            [QueueTrigger("orders", Connection = "AzureWebJobsStorage")]Order order,
+            [QueueTrigger("orders", Connection = "OrderStorage")]Order order,
             [OrchestrationClient] DurableOrchestrationClientBase orchestrationClientBase, 
             ILogger log)
         {
