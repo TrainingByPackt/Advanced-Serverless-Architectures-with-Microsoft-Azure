@@ -4,8 +4,8 @@ using OrderDurableFunctions.Models;
 using SendGrid.Helpers.Mail;
 
 namespace OrderDurableFunctions.Activities {
-    public class PackAndShipOrder {
-        [FunctionName("PackAndShipOrder")]
+    public class SendUserApologyEmail {
+        [FunctionName("SendUserApologyEmail")]
         public static void Run(
             [ActivityTrigger] (Order,string) orderTuple,
             [SendGrid(ApiKey = "SendGridApiKey")] out SendGridMessage message
@@ -14,13 +14,13 @@ namespace OrderDurableFunctions.Activities {
                 var order = orderTuple.Item1;
                 var instanceId = orderTuple.Item2;
                 message = new SendGridMessage();
-                message.AddTo("danbass8@googlemail.com");
+                message.AddTo(order.EmailAddress);
                 message.SetFrom(new EmailAddress("random@email.com"));
                 message.AddContent("text/html",
-                $@"<h1>We've got one!</h1>
-                <p>Order of {order.Quantity} items of {order.ProductId} to {order.DeliveryAddress}. 
-                <a href='http://localhost:7071/api/CompletePackingAndShipping/{instanceId}'>Click here when order complete</a>");
-                message.SetSubject("Order");
+                $@"<h1>Sorry, your order was unsuccessful</h1>
+                <p>Your order of {order.Quantity} items of {order.ProductId} to {order.DeliveryAddress} was unfortunately unsuccessful. 
+                Please call us on 07123456789 to see how we can help.</p>");
+                message.SetSubject("Order unsuccessful");
         }
     }
 }

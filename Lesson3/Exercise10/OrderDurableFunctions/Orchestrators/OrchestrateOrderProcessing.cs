@@ -10,13 +10,17 @@ namespace OrderDurableFunctions {
             var input = context.GetInput<Order>();
             Console.WriteLine(input.ProductId);
             Console.WriteLine(context.InstanceId);
-            // var resultOfUpdateStockLevel = await context.CallActivityAsync<bool>("UpdateStockLevel",input);
+            var resultOfUpdateStockLevel = await context.CallActivityAsync<bool>("UpdateStockLevel",input);
             if(true){
                 await context.CallActivityAsync("PackAndShipOrder",(input,context.InstanceId));
-                bool orderSuccessful = await context.WaitForExternalEvent<bool>("OrderCompleted",TimeSpan.FromSeconds(30),false);
-                if(orderSuccessful){
+                Task<bool> orderSuccessful = context.WaitForExternalEvent<bool>("OrderCompleted");
+                Task<bool> orderFailed = context.WaitForExternalEvent<bool>("OrderFailed");
+
+                Task orderResult = await Task.WhenAny(orderSuccessful, orderFailed);
+                if(orderResult == orderSuccessful){
                     Console.WriteLine("Order was successfully shipped!");
                 } else {
+                    await context.CallActivityAsync("SendUserApologyEmail",(input,context.InstanceId));
                     Console.WriteLine("Fail");
                 }
             }
