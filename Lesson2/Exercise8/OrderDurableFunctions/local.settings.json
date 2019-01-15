@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage":"DefaultEndpointsProtocol=https;AccountName=advancedserverless;AccountKey=X9RMo1yy7bgGn8DFlGDr5aYdLJJczETwp92LgcmvangD35J76qdz6l1204kc9MLJIBOeSOOom25v7ksLEx56Qg==;EndpointSuffix=core.windows.net",
+        "DOTNET_RUNTIME_ID" : "osx-x64"
+
+    }
+}
