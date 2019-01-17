@@ -28,7 +28,7 @@ namespace OrdersApi
             if(product != null && product.QuantityInStock >= order.Quantity){
                 return order;
             } else {
-                throw new Exception("Invalid Order");
+                return null;
             }
         }
     }
