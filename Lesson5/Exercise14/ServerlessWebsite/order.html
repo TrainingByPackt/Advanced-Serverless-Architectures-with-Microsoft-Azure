@@ -1,0 +1,44 @@
+<html>
+    <head>
+            <script src="https://secure.aadcdn.microsoftonline-p.com/lib/0.2.4/js/msal.min.js"></script>
+    </head>
+    <body>
+        <div>
+            Product Identifier: <input type="text" id="productId">
+			<br>
+			Quantity to Order: <input type="number" id="quantityOrdered">
+            <br>
+            <button id="submissionButton">Submit Order</button>
+        </div>
+        <script>
+            var applicationConfig = {
+                clientID: '0580ca7b-a955-445c-a5b0-006bd3b52418',
+                authority: "https://login.microsoftonline.com/tfp/tshirts.onmicrosoft.com/B2C_1_sign_up_sign_in",
+                b2cScopes: ["openid"]
+            };
+            var clientApplication = new Msal.UserAgentApplication(applicationConfig.clientID, applicationConfig.authority, function (errorDesc, token, error, tokenType) {});
+            var user = clientApplication.getUser();
+            document.getElementById('submissionButton').addEventListener('click', async function(event) {
+                event.preventDefault();
+                var productId = document.getElementById('productId').value;
+                var quantity = document.getElementById('quantityOrdered').value;
+                var deliveryAddress = user.idToken.streetAddress;
+                var emailAddress = user.idToken.emails[0];
+                const response = await fetch("http://localhost:8000/api/SubmitOrder", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(
+                    { 
+                        productId: productId, 
+                        quantity: quantity, 
+                        deliveryAddress: deliveryAddress, 
+                        emailAddress:emailAddress
+                    })
+                });
+            });
+        </script>
+    </body>
+</html>

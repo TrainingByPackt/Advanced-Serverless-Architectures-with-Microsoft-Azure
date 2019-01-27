@@ -1,0 +1,65 @@
+<html>
+	<body>
+		<h1>Hello World!</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
+						Colour
+					</th>
+					<th>
+						Quantity in Stock
+					</th>
+				</tr>
+			</thead>
+			<tbody id='tableBody'>
+			</tbody>
+		</table>
+		<script>
+			fetch('http://localhost:7071/api/GetProducts')
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				data.forEach(function(product){
+					var productRow = rowOfDataFromObject(product);
+					document.getElementById("tableBody").appendChild(productRow);
+				});
+			});
+			function rowOfDataFromObject(data){
+				let row = document.createElement('tr');
+
+				let nameTableElement = document.createElement('td');
+				nameTableElement.appendChild(document.createTextNode(data.name))
+				row.appendChild(nameTableElement);
+				
+				let sizeTableElement = document.createElement('td');
+				sizeTableElement.appendChild(document.createTextNode(data.size))
+				row.appendChild(sizeTableElement);
+				
+				let colourTableElement = document.createElement('td');
+				colourTableElement.appendChild(document.createTextNode(data.colour))
+				row.appendChild(colourTableElement);
+				
+				let quantityTableElement = document.createElement('td');
+				quantityTableElement.appendChild(document.createTextNode(data.quantityInStock))
+				row.appendChild(quantityTableElement);
+
+				return row;
+			}
+			var appInsights=window.appInsights||function(a){
+			function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+			}({
+				instrumentationKey: "e95f5900-4768-4b17-9cde-e32a0282f41e"
+			});
+			window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+			window.appInsights.trackEvent("Page loaded");
+		</script>
+	</body>
+</html>
