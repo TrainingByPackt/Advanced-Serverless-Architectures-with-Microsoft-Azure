@@ -1,0 +1,40 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form>
+            Product Identifier: <input type="text" id="productId">
+			<br>
+			Quantity to Order: <input type="number" id="quantityOrdered">
+            <br>
+            Delivery Address <input type="text" id="deliveryAddress">
+            <br>
+            Email Address <input type="text" id="emailAddress">
+            <br>
+            <button id="submissionButton">Submit Order</button>
+        </form>
+        <script>
+            document.getElementById('submissionButton').addEventListener('click', async function(event) {
+                event.preventDefault();
+                var productId = document.getElementById('productId').value;
+                var quantity = document.getElementById('quantityOrdered').value;
+                var deliveryAddress = document.getElementById('deliveryAddress');
+                var emailAddress = document.getElementById('emailAddress');
+                const response = await fetch("http://localhost:8000/api/SubmitOrder", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(
+                    { 
+                        productId: productId, 
+                        quantity: quantity, 
+                        deliveryAddress: deliveryAddress, 
+                        emailAddress:emailAddress
+                    })
+                });
+            });
+        </script>
+    </body>
+</html>

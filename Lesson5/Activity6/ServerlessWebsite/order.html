@@ -1,0 +1,52 @@
+<html>
+    <head>
+            <script src="https://secure.aadcdn.microsoftonline-p.com/lib/0.2.4/js/msal.min.js"></script>
+    </head>
+    <body>
+        <div>
+            Product Identifier: <input type="text" id="productId">
+			<br>
+			Quantity to Order: <input type="number" id="quantityOrdered">
+            <br>
+            <button id="submissionButton">Submit Order</button>
+        </div>
+        <script>
+        var appInsights=window.appInsights||function(a){
+         function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+        }({
+            instrumentationKey: "e95f5900-4768-4b17-9cde-e32a0282f41e"
+        });
+        window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+        window.appInsights.trackEvent("Page loaded");
+            var applicationConfig = {
+                clientID: '0580ca7b-a955-445c-a5b0-006bd3b52418',
+                authority: "https://login.microsoftonline.com/tfp/tshirts.onmicrosoft.com/B2C_1_sign_up_sign_in",
+                b2cScopes: ["openid"]
+            };
+            var clientApplication = new Msal.UserAgentApplication(applicationConfig.clientID, applicationConfig.authority, function (errorDesc, token, error, tokenType) {});
+            var user = clientApplication.getUser();
+            document.getElementById('submissionButton').addEventListener('click', async function(event) {
+                event.preventDefault();
+                var productId = document.getElementById('productId').value;
+                var quantity = document.getElementById('quantityOrdered').value;
+                var deliveryAddress = "address"//user.idToken.streetAddress;
+                var emailAddress = "test@test.com"//user.idToken.emails[0];
+                const response = await fetch("https://advancedserverlessorderfunc.azurewebsites.net/api/SubmitOrder?code=S9rLUwaoIzclhfHvxRsi7NhMDJt567aTaMQqecHSs7CvDuqmGJTS3A==", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify(
+                    { 
+                        productId: productId, 
+                        quantity: quantity, 
+                        deliveryAddress: deliveryAddress, 
+                        emailAddress:emailAddress
+                    })
+                });
+            });
+            
+        </script>
+    </body>
+</html>

@@ -22,8 +22,7 @@ namespace OrderDurableFunctions
             log.LogInformation("C# HTTP trigger function processed a request.");
             string instanceId = await orchestrationClientBase.StartNewAsync("OrchestrateOrderProcessing", new Order{
                 ProductId = "c651bd9e-0df2-43b9-8431-5c2860519c18",
-                Quantity = 10,
-                DeliveryAddress = "bob"
+                Quantity = 10
             });
             string name = req.Query["name"];
 

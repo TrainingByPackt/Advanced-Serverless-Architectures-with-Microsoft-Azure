@@ -26,10 +26,9 @@ namespace OrdersApi
             ILogger log)
         {
             if(product != null && product.QuantityInStock >= order.Quantity){
-                order.Id = $"{order.ProductId}_{order.Quantity}_{order.DeliveryAddress}_{DateTime.UtcNow}";
                 return order;
             } else {
-                throw new Exception("Invalid Order");
+                return null;
             }
         }
     }

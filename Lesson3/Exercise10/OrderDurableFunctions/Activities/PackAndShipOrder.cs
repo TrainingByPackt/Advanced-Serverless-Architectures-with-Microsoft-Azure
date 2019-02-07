@@ -19,8 +19,7 @@ namespace OrderDurableFunctions.Activities {
                 message.AddContent("text/html",
                 $@"<h1>We've got one!</h1>
                 <p>Order of {order.Quantity} items of {order.ProductId} to {order.DeliveryAddress}. 
-                <a href='http://localhost:7071/api/CompletePackingAndShipping/{instanceId}'>Click here when order complete</a><br>
-                <a href='http://localhost:7071/api/FailedOrderProcessing/{instanceId}'>Click here if order failed</a>");
+                <a href='http://localhost:7071/api/CompletePackingAndShipping/{instanceId}'>Click here when order complete</a>");
                 message.SetSubject("Order");
         }
     }

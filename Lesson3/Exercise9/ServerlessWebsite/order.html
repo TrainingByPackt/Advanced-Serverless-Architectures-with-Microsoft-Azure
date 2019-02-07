@@ -2,28 +2,25 @@
     <head>
     </head>
     <body>
-        <form>
+        <div>
             Product Identifier: <input type="text" id="productId">
 			<br>
 			Quantity to Order: <input type="number" id="quantityOrdered">
-            <br>
-            Delivery Address <input type="text" id="deliveryAddress">
-            <br>
+			<br>
             <button id="submissionButton">Submit Order</button>
-        </form>
+        </div>
         <script>
             document.getElementById('submissionButton').addEventListener('click', async function(event) {
                 event.preventDefault();
                 var productId = document.getElementById('productId').value;
                 var quantity = document.getElementById('quantityOrdered').value;
-                var deliveryAddress = document.getElementById('deliveryAddress');
-                const response = await fetch("http://localhost:8000/api/SubmitOrder", {
+                const response = await fetch("http://localhost:7071/api/SubmitOrder", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                body: JSON.stringify({ productId: productId, quantity: quantity, deliveryAddress: deliveryAddress})
+                body: JSON.stringify({ productId: productId, quantity: quantity})
                 });
             });
         </script>

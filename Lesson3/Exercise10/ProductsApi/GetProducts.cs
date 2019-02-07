@@ -21,27 +21,16 @@ namespace ProductsApi
 {
     public static class GetProducts
     {
-        // private static DocumentClient client = new DocumentClient(new Uri(""),"");
-        // private static Uri productCollectionUri = UriFactory.CreateDocumentCollectionUri("serverless","products");
+        private static DocumentClient client = new DocumentClient(new Uri(""),"");
+        private static Uri productCollectionUri = UriFactory.CreateDocumentCollectionUri("serverless","products");
 
-        // private static readonly FeedOptions productQueryOptions = new FeedOptions { MaxItemCount = -1 };
+        private static readonly FeedOptions productQueryOptions = new FeedOptions { MaxItemCount = -1 };
 
         [FunctionName("GetProducts")]
         public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]HttpRequest req, ILogger log)
         {
-            // var results = client.CreateDocumentQuery<Product>(productCollectionUri, productQueryOptions);
-            var results = new List<Product>()
-            {
-                new Product
-                {
-                    Id = "",
-                    Name = "Metallica",
-                    Size = "XL",
-                    Colour = "Black",
-                    TypeId = "tshirt",
-                    QuantityInStock = 10
-                }
-            };
+            var results = client.CreateDocumentQuery<Product>(productCollectionUri, productQueryOptions);
+            
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
             responseMessage.Headers.Add("cache-control","public");
             responseMessage.Content = new StringContent

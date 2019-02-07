@@ -13,9 +13,6 @@ namespace OrdersApi.Models {
         public string DeliveryAddress {get; set;}
 
         [JsonProperty("id")]
-        public string Id {get; set;}
-
-        [JsonProperty("emailAddress")]
-        public string EmailAddress { get; set; }        
+        public string Id {get; set;}        
     }
 }
