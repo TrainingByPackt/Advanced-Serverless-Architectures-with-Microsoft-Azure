@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 
 namespace OrderDurableFunctions {
-    public class ReportOrder {
+    public class CompletePackingAndShipping {
         [FunctionName("CompletePackingAndShipping")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(
@@ -17,7 +17,6 @@ namespace OrderDurableFunctions {
             string instanceId,
             [OrchestrationClient] DurableOrchestrationClientBase client)
         {
-            Console.WriteLine(client.GetStatusAsync(instanceId).Status.ToString());
             await client.RaiseEventAsync(instanceId, "OrderCompleted",true);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

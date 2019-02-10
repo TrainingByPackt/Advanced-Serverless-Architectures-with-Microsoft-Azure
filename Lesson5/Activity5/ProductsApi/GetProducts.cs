@@ -39,11 +39,6 @@ namespace ProductsApi
             };
             log.LogInformation("Client’s IP Address: {clientIpAddress}",req.HttpContext.Connection.RemoteIpAddress);
             log.LogInformation("Preparing to submit request to database");
-            var rand = new Random();
-            if(4 > rand.Next(9)){
-                log.LogError("Error! Database unavailable");
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
             responseMessage.Headers.Add("cache-control","public");
             responseMessage.Content = new StringContent

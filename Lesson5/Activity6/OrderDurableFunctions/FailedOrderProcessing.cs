@@ -17,7 +17,6 @@ namespace OrderDurableFunctions {
             string instanceId,
             [OrchestrationClient] DurableOrchestrationClientBase client)
         {
-            Console.WriteLine(client.GetStatusAsync(instanceId).Status.ToString());
             await client.RaiseEventAsync(instanceId, "OrderFailed",false);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
