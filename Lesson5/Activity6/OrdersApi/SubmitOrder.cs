@@ -23,11 +23,12 @@ namespace OrdersApi
             [CosmosDB(
                 databaseName: "serverless",
                 collectionName: "products",
-                ConnectionStringSetting = "CosmosDBConnection",SqlQuery = "select * from products r where r.id = {ProductId}")]IEnumerable<Product> products,
+                ConnectionStringSetting = "CosmosDBConnection", 
+                Id = "{ProductId}",
+                PartitionKey = "black")]Product product,
             ILogger log)
         {
             log.LogInformation("bob");
-            var product = products.First();
             if(product != null && product.QuantityInStock >= order.Quantity){
                 order.Id = $"{order.ProductId}_{order.Quantity}_{order.DeliveryAddress}_{DateTime.UtcNow}";
                 return order;

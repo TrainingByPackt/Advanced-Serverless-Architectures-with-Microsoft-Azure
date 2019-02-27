@@ -22,7 +22,8 @@ namespace OrdersApi
                 databaseName: "serverless",
                 collectionName: "products",
                 ConnectionStringSetting = "CosmosDBConnection", 
-                Id = "{ProductId}")]Product product,
+                Id = "{ProductId}",
+                PartitionKey = "black")]Product product,
             ILogger log)
         {
             if(product != null && product.QuantityInStock >= order.Quantity){
