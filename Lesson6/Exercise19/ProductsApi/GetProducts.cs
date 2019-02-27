@@ -16,6 +16,7 @@ using ProductsApi.Models;
 using System.Net.Http;
 using System.Net;
 using Newtonsoft.Json.Serialization;
+using System.Configuration;
 
 namespace ProductsApi
 {
@@ -23,8 +24,13 @@ namespace ProductsApi
     {
 
         [FunctionName("GetProducts")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]HttpRequest req, ILogger log)
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]HttpRequest req, ILogger log)
         {
+            var triggerError = Environment.GetEnvironmentVariable("triggererror");
+            if(triggerError == "true")
+            {
+                throw new Exception("Error");
+            }
             var results = new List<Product>()
             {
                 new Product 
