@@ -32,6 +32,6 @@ For an optimal student experience, we recommend the following hardware configura
 ### Software requirements
 You’ll also need the following software installed in advance:
 
-* OS: Any desktop Linux version or iOS, or Windows 10 (for Windows 10 systems, you can use the Windows subsystem for Linux; this is only available in the latest versions).
+* OS: Any desktop Linux version or macOS, or Windows 10.
 * Browser: Use one of the latest browsers such as Firefox, Chrome, Safari, Edge, or IE11, for example.
 
