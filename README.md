@@ -1,7 +1,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/TrainingByPackt/Advanced-Serverless-Architectures-with-Microsoft-Azure.svg)](https://github.com/TrainingByPackt/Command-Line-Fundamentals/issues)
 [![GitHub forks](https://img.shields.io/github/forks/TrainingByPackt/Advanced-Serverless-Architectures-with-Microsoft-Azure.svg)](https://github.com/TrainingByPackt/Command-Line-Fundamentals/network)
 [![GitHub stars](https://img.shields.io/github/stars/TrainingByPackt/Advanced-Serverless-Architectures-with-Microsoft-Azure.svg)](https://github.com/TrainingByPackt/Command-Line-Fundamentals/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/TrainingByPackt/Command-Line-Fundamentals/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/TrainingByPackt/Advanced-Serverless-Architectures-with-Microsoft-Azure/pulls)
 
 
 
